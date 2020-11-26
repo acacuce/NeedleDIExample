@@ -15,7 +15,7 @@ targets:
       - target: Interfaces
       - target: Core
     preBuildScripts:
-      - script: "export SOURCEKIT_LOGGING=0 && needle generate Sources/DI/NeedleGenerated.swift ../NeedleDIExample/ --exclude-paths /Pods"
+      - script: "export SOURCEKIT_LOGGING=0 && needle generate Sources/DI/NeedleGenerated.swift . --exclude-paths /Pods"
         name: Needle
 # Модуль для банковских карт
   Cards:
