@@ -49,8 +49,9 @@ final class TransactionsView: UIView {
 
     private func makeConstraints() {
         scrollableStackView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        scrollableStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
-        scrollableStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        scrollableStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        scrollableStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         scrollableStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 }
+
