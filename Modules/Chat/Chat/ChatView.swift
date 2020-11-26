@@ -41,7 +41,7 @@ final class ChatView: UIView {
         let button = UIButton(
             type: .system,
             primaryAction: UIAction(
-                title: "Показать карту",
+                title: "Показать карту 1",
                 image: UIImage(systemName: "creditcard"),
                 handler: { [unowned self] action in
                     self.showCard?()
