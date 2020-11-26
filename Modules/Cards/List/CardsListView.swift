@@ -45,6 +45,7 @@ final class CardsListView: UIView {
         )
         button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: .zero)
         scrollableStackView.stackView.addArrangedSubview(button)
 
         let button2 = UIButton(
@@ -59,6 +60,7 @@ final class CardsListView: UIView {
         )
         button2.titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         button2.translatesAutoresizingMaskIntoConstraints = false
+        button2.contentEdgeInsets = .init(top: 16, left: 16, bottom: 16, right: .zero)
         scrollableStackView.stackView.addArrangedSubview(button2)
     }
 
@@ -69,3 +71,4 @@ final class CardsListView: UIView {
         scrollableStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 }
+

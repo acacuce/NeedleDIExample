@@ -8,12 +8,13 @@
 import UIKit
 import Interfaces
 
-final class TransactionItemView: UIStackView {
+final class TransactionItemView: UIView {
     var sendToChat: EmptyAction?
     lazy var titleLabel: UILabel = {
         let instance = UILabel()
         instance.font = UIFont.preferredFont(forTextStyle: .body)
         instance.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        instance.translatesAutoresizingMaskIntoConstraints = false
         return instance
     }()
 
@@ -30,6 +31,7 @@ final class TransactionItemView: UIStackView {
         instance.setContentHuggingPriority(.required, for: .horizontal)
         instance.titleLabel?.textAlignment = .right
         instance.titleLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
+        instance.translatesAutoresizingMaskIntoConstraints = false
         return instance
     }()
 
@@ -47,16 +49,25 @@ final class TransactionItemView: UIStackView {
     // MARK: - Private Methods
 
     private func commonInit() {
+        translatesAutoresizingMaskIntoConstraints = false
         addSubviews()
         makeConstraints()
-        axis = .horizontal
-        distribution = .fill
     }
 
     private func addSubviews() {
-        addArrangedSubview(titleLabel)
-        addArrangedSubview(infoButton)
+        addSubview(titleLabel)
+        addSubview(infoButton)
     }
 
-    private func makeConstraints() {}
+    private func makeConstraints() {
+        titleLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: self.infoButton.leadingAnchor).isActive = true
+
+        infoButton.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        infoButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        infoButton.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
 }
+
