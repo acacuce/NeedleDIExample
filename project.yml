@@ -57,7 +57,7 @@ targets:
     dependencies:
       - target: Profile
       # Нужен чату, но если включим появится ошибка компиляции
-      # - target: Cards
+      - target: Cards
       - target: Interfaces
       - target: Core
     settings:
