@@ -1,0 +1,99 @@
+name: NeedleDIExample
+options:
+  bundleIdPrefix: com.opnbank.test.di
+targets:
+  App:
+    type: application
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources: [Sources]
+    dependencies:
+      - target: Cards
+      - target: Profile
+      - target: Chat
+      - target: Transactions
+      - target: Interfaces
+      - target: Core
+    preBuildScripts:
+      - script: "export SOURCEKIT_LOGGING=0 && needle generate Sources/DI/NeedleGenerated.swift ../NeedleDIExample/ --exclude-paths /Pods"
+        name: Needle
+# Модуль для банковских карт
+  Cards:
+    type: framework
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: Modules/Cards
+        createIntermediateGroups: true
+    dependencies:
+      - target: Chat
+      - target: Transactions
+      - target: Interfaces
+      - target: Core
+    settings:
+      INFOPLIST_FILE: "$(SRCROOT)/Modules/Cards/Info.plist"
+      PRODUCT_BUNDLE_IDENTIFIER: "ru.openbank.mobile.cards"
+  # Модуль для банковских карт
+  Profile:
+    type: framework
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: Modules/Profile
+        createIntermediateGroups: true
+    dependencies:
+      - target: Interfaces
+      - target: Core
+    settings:
+      INFOPLIST_FILE: "$(SRCROOT)/Modules/Profile/Info.plist"
+      PRODUCT_BUNDLE_IDENTIFIER: "ru.openbank.mobile.profile"
+  Chat:
+    type: framework
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: Modules/Chat
+        createIntermediateGroups: true
+    dependencies:
+      - target: Profile
+      # Нужен чату, но если включим появится ошибка компиляции
+      # - target: Cards
+      - target: Interfaces
+      - target: Core
+    settings:
+      INFOPLIST_FILE: "$(SRCROOT)/Modules/Chat/Info.plist"
+      PRODUCT_BUNDLE_IDENTIFIER: "ru.openbank.mobile.chat"
+  Transactions:
+    type: framework
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: Modules/Transactions
+        createIntermediateGroups: true
+    dependencies:
+      - target: Chat
+      - target: Interfaces
+      - target: Core
+    settings:
+      INFOPLIST_FILE: "$(SRCROOT)/Modules/Transactions/Info.plist"
+      PRODUCT_BUNDLE_IDENTIFIER: "ru.openbank.mobile.transactions"
+  Interfaces:
+    type: framework
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: Frameworks/Interfaces
+        createIntermediateGroups: true
+    settings:
+      INFOPLIST_FILE: "$(SRCROOT)/Frameworks/Interfaces/Info.plist"
+      PRODUCT_BUNDLE_IDENTIFIER: "ru.openbank.mobile.interfaces"
+  Core:
+    type: framework
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: Frameworks/Core
+        createIntermediateGroups: true
+    settings:
+      INFOPLIST_FILE: "$(SRCROOT)/Frameworks/Core/Info.plist"
+      PRODUCT_BUNDLE_IDENTIFIER: "ru.openbank.mobile.core"
